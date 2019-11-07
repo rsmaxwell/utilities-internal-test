@@ -126,11 +126,11 @@ fi
 # Replace tags in the source for the Version class
 #*****************************************************************
 TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
-    
+
 find . -name "Version.java" | while read versionfile; do
 
     echo "Replacing tags in ${versionfile}"
-    
+
     sed -i "s@<UTILITIES_TEST_VERSION>@${BUILD_ID}@g"     ${versionfile}
     sed -i "s@<BUILD_DATE>@${TIMESTAMP}@g"                ${versionfile}
     sed -i "s@<GIT_COMMIT>@${GIT_COMMIT}@g"               ${versionfile}
@@ -145,4 +145,3 @@ done
 mvn versions:set -DnewVersion=${BUILD_ID}
 mvn versions:use-dep-version -DdepVersion=${utilities_version} -Dincludes=com.rsmaxwell.utilities:utilities
 mvn versions:use-latest-releases
-
